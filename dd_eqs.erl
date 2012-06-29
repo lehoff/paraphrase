@@ -8,6 +8,31 @@
 %%------------------------------------------------------------------------------
 %% ASTs
 %%------------------------------------------------------------------------------
+%% The following code represents a set of equations translated to an AST. This
+%% is so that we can present the semantic model without having to worry about
+%% parsing its syntax. 
+%%
+%% Q represents a set of mutually recursive equations, and R represents the 
+%% demands of the program.
+%%
+%% In order to make it clearer, the following is a high-level description which
+%% could be parsed to the following ASTs.
+%%
+%% factorial_ast Q => 
+%%   fact = if #0 == 0 then 1 else #0 * fact [0 <- #0 - 1]
+%%
+%% fibonnaci_ast Q =>
+%%   fib = if #0 <= 1 then 0 else fib [0 <- #0 - 1] + fib [0 <- #0 - 2]
+%%
+%% factorial_ast R =>
+%%   fact << 0 <- 12
+%%
+%% fibonacci_ast R =>
+%%   fib << 0 <- 10
+%%
+%% Where # is the dimensional index operator, [A <- B] is the relative context 
+%% operator, and Id << represents demands made to an identifier Id.
+%%------------------------------------------------------------------------------
 
 factorial_ast() ->
   Q = [{equation, {id, "fact"},
