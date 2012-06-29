@@ -64,9 +64,9 @@ evaluate({context_r, E1, Es}, Q, C, D) ->
 test() ->
   {Q, R} = dd_eqs:fibonacci_ast(),
   T1 = erlang:now(),
-  X = r(R, Q),
+  P = r(R, Q),
   T2 = erlang:now(),
-  {timer:now_diff(T2, T1), X}.
+  {timer:now_diff(T2, T1), P}.
 
 
  
